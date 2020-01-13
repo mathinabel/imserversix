@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--数据库驱动-->
+        <property name="hibernate.connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <!--连接-->
+        <property name="hibernate.connection.url">jdbc:mariadb://localhost:3306/im</property>
+        <!--用户名-->
+        <property name="hibernate.connection.username">root</property>
+        <!--密码-->
+        <property name="hibernate.connection.password">qyj7468945</property>
+
+        <property name="connection.useUnicode">true</property>
+        <property name="connection.characterEncoding">utf8</property>
+
+        <property name="hibernate.dialect">org.hibernate.dialect.MariaDB10Dialect</property>
+
+        <property name="hibernate.show_sql">true</property>
+
+        <property name="hbm2ddl.auto">update</property>
+
+
+        <mapping class="com.quyuanjin.imserver.pojo.User"/>
+        <mapping class="com.quyuanjin.imserver.pojo.UnReadMessage"/>
+        <mapping class="com.quyuanjin.imserver.pojo.UnReadAddFriendRequest"/>
+        <mapping class="com.quyuanjin.imserver.pojo.UserRelationShip"/>
+        <mapping class="com.quyuanjin.imserver.pojo.Usert"/>
+
+    </session-factory>
+</hibernate-configuration>
