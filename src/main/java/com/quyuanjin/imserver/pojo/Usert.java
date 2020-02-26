@@ -1,40 +1,17 @@
 package com.quyuanjin.imserver.pojo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-@Entity
 public class Usert {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    Long id;
-    String createAt;
-    String description;
-    String name;
-    String user;
-    String pwd;
-    String phone;
-    String portrait;
-    String sex;
-    String token;
-    String updateAt;
-
-    public Usert(String createAt, String description, String name, String user, String pwd, String phone, String portrait, String sex, String token, String updateAt) {
-        this.createAt = createAt;
-        this.description = description;
-        this.name = name;
-        this.user = user;
-        this.pwd = pwd;
-        this.phone = phone;
-        this.portrait = portrait;
-        this.sex = sex;
-        this.token = token;
-        this.updateAt = updateAt;
-    }
+    private Long id;
+    private String username;
+    private String password;
 
     public Usert() {
+    }
+
+    public Usert(Long id, String username, String password) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -45,83 +22,19 @@ public class Usert {
         this.id = id;
     }
 
-    public String getCreateAt() {
-        return createAt;
+    public String getUsername() {
+        return username;
     }
 
-    public void setCreateAt(String createAt) {
-        this.createAt = createAt;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
-
-    public String getPwd() {
-        return pwd;
-    }
-
-    public void setPwd(String pwd) {
-        this.pwd = pwd;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getPortrait() {
-        return portrait;
-    }
-
-    public void setPortrait(String portrait) {
-        this.portrait = portrait;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getToken() {
-        return token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
-    }
-
-    public String getUpdateAt() {
-        return updateAt;
-    }
-
-    public void setUpdateAt(String updateAt) {
-        this.updateAt = updateAt;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

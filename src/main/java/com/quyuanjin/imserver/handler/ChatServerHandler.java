@@ -36,7 +36,7 @@ public class ChatServerHandler extends SimpleChannelInboundHandler<String> {
 
         channelGroup.remove(ctx.channel());
 
-        hashMap.remove( getKey(hashMap,ctx.channel().id()));
+        hashMap.remove(getKey(hashMap,ctx.channel().id()));
 
         log.info(ctx.channel().id()+":离线了");
         log.info("hashmap当前连接个数为："+hashMap.size());

@@ -3,6 +3,9 @@ package com.quyuanjin.imserver.constant;
 public  class ProtoConst {
     ProtoConst(){}
 
+    public static final String ADD_FRIEND_AGREE = "1022";
+    public static final String ADD_FRIEND_AGREE_BACK = "1023";
+
     public static final String  LONG_CONNECT= "1000";
     public static final String  LONG_CONNECT_BACK= "1001";
 
