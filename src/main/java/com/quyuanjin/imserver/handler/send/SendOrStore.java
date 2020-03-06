@@ -76,7 +76,10 @@ public class SendOrStore {
      */
     public void storeURADAddFriendNew(UnReadAddFriendRequest unReadAddFriendRequest) {
         //selfuid +targetuid 同时标明发送者还是被添加者 自身在获取的时候不会乱
+        String c = unReadAddFriendRequest.getContentTextView();
+        String d = unReadAddFriendRequest.getNameTextView();
         unReadAddFriendRequest.setReadType(State.addfriend_send_but_wait_to_answer);
+        unReadAddFriendRequest.setNameTextView(c);
         HibernateUtil.add(unReadAddFriendRequest);
         // getSessionAndCommit(unReadAddFriendRequest);
         System.out.println("进行数据库保存加好友请求：加好友一");
@@ -88,7 +91,7 @@ public class SendOrStore {
         unReadAddFriendRequest1.setReadType(State.be_asked_to_addfriend);
         unReadAddFriendRequest1.setUserid(b);
         unReadAddFriendRequest1.setReceiverId(a);
-        unReadAddFriendRequest1.setNameTextView(unReadAddFriendRequest.getNameTextView());
+        unReadAddFriendRequest1.setNameTextView(d);
 
         HibernateUtil.add(unReadAddFriendRequest1);
         //getSessionAndCommit(unReadAddFriendRequest1);
@@ -116,7 +119,7 @@ public class SendOrStore {
         session.close();
 
         System.out.println("进行数据库保存加好友fuifu请求");
-      //  HibernateUtil.add(unRead);
+        //  HibernateUtil.add(unRead);
 
     }
 
@@ -146,29 +149,43 @@ public class SendOrStore {
 
 
     public void storeContract(String selfuuid, String frienduuid) {
-        PojoContract pojoContract = new PojoContract(selfuuid, frienduuid, unReadAddFriendRequest.getPortraitImageViewnetPath(),
-                unReadAddFriendRequest.getContentTextView(),"" ,
+        PojoContract pojoContract = new PojoContract(selfuuid, frienduuid, getPortFromUser(frienduuid),
+                unReadAddFriendRequest.getContentTextView(), "",
                 unReadAddFriendRequest.getSex(), unReadAddFriendRequest.getReceiverId(), State.TAG_ITEM, "");
         // getSessionAndCommit(pojoContract);
         HibernateUtil.add(pojoContract);
-        PojoContract pojoContract2 = new PojoContract(frienduuid, selfuuid, unReadAddFriendRequest.getPortraitImageViewnetPath(),
-                unReadAddFriendRequest.getNameTextView()  ,"" ,
+        PojoContract pojoContract2 = new PojoContract(frienduuid, selfuuid, getPortFromUser(selfuuid),
+                unReadAddFriendRequest.getNameTextView(), "",
                 unReadAddFriendRequest.getSex(), unReadAddFriendRequest.getReceiverId(), State.TAG_ITEM, "");
         // getSessionAndCommit(pojoContract2);
         HibernateUtil.add(pojoContract2);
     }
 
     public void storeUserRecementMsg(String selfuuid, String frienduuid) {
-        RecementMsg recementMsg = new RecementMsg(selfuuid, frienduuid, unReadAddFriendRequest.getPortraitImageViewnetPath(),
-                "", unReadAddFriendRequest.getNameTextView(), unReadAddFriendRequest.getReceiverTime(), "", "", "", "");
+        RecementMsg recementMsg = new RecementMsg(selfuuid, frienduuid, getPortFromUser(frienduuid),
+                "", unReadAddFriendRequest.getContentTextView(), unReadAddFriendRequest.getReceiverTime(), "", "", "", "");
 
         //  getSessionAndCommit(recementMsg);
         HibernateUtil.add(recementMsg);
 
 
-        RecementMsg recementMsg2 = new RecementMsg(frienduuid, selfuuid, unReadAddFriendRequest.getPortraitImageViewnetPath(),
+        RecementMsg recementMsg2 = new RecementMsg(frienduuid, selfuuid, getPortFromUser(selfuuid),
                 "", unReadAddFriendRequest.getNameTextView(), unReadAddFriendRequest.getReceiverTime(), "", "", "", "");
         HibernateUtil.add(recementMsg2);
         // getSessionAndCommit(recementMsg2);
+    }
+
+    public String getPortFromUser(String userid) {
+        Session session = getSession();
+        Transaction tx = session.beginTransaction();
+        String hql = "from User user where user.id=?1";
+        Query q = session.createQuery(hql);
+        q.setParameter(1, Long.valueOf(userid));
+        User user  = (User) q.uniqueResult();
+
+
+        tx.commit();
+        session.close();
+        return user.getPortrait();
     }
 }

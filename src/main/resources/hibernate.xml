@@ -10,7 +10,7 @@
         <property name="hibernate.connection.url">jdbc:mariadb://localhost:3306/im</property>
         <!--用户名-->
         <property name="hibernate.connection.username">root</property>
-        <!--密码-->
+        <!--密码 本地qyj7468945 服务端Qyj7468945-->
         <property name="hibernate.connection.password">qyj7468945</property>
 
         <property name="connection.useUnicode">true</property>
@@ -24,10 +24,10 @@
 
 
         <mapping class="com.quyuanjin.imserver.pojo.User"/>
-        <mapping class="com.quyuanjin.imserver.pojo.UnReadMessage"/>
+        <mapping class="com.quyuanjin.imserver.pojo.Message"/>
         <mapping class="com.quyuanjin.imserver.pojo.UnReadAddFriendRequest"/>
         <mapping class="com.quyuanjin.imserver.pojo.UserRelationShip"/>
-        <mapping class="com.quyuanjin.imserver.pojo.Usert"/>
-
+        <mapping class="com.quyuanjin.imserver.pojo.RecementMsg"/>
+        <mapping class="com.quyuanjin.imserver.pojo.PojoContract"/>
     </session-factory>
 </hibernate-configuration>
